@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/livros")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://bibliotecadjr.pages.dev/", "http://localhost:3000"})
 public class LivroController {
 
     @Autowired
