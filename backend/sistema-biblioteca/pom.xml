@@ -73,7 +73,8 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+        <finalName>sistema-biblioteca</finalName>
+        <plugins>
 			<!-- Compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
