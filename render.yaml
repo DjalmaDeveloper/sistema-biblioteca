@@ -4,16 +4,26 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     dockerContext: ./
-    region: oregon # ou sua região preferida
+    region: oregon
     plan: free
     branch: main
     healthCheckPath: /api/autores
     envVars:
-      - key: DATABASE_URL
-        sync: false
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: PORT
         value: 8080
       - key: JAVA_OPTS
         value: "-Xms256m -Xmx512m"
+      # Opcao: remova DATABASE_URL e use valores fixos no application-prod.properties
+      # OU configure as variaveis DB_* abaixo:
+      - key: DB_HOST
+        value: dpg-d46ldseuk2gs7388mc3g-a.oregon-postgres.render.com
+      - key: DB_PORT
+        value: 5432
+      - key: DB_NAME
+        value: biblioteca_oy3m
+      - key: DB_USER
+        value: biblioteca_user
+      - key: DB_PASSWORD
+        sync: false  # Marque como sensivel para nao aparecer nos logs
