@@ -1,38 +1,89 @@
-# Maven
-target/
-.mvn/
-mvnw
-mvnw.cmd
+# =================================
+# .dockerignore Otimizado
+# Sistema Biblioteca
+# =================================
 
-# IDEs
+# Build outputs (serão recriados no container)
+target/
+build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =================================
+# IDEs e Ferramentas de Desenvolvimento
+# =================================
 .idea/
 .vscode/
 *.iml
+*.iws
+*.ipr
 .classpath
 .project
 .settings/
+.springBeans
+.sts4-cache
+.apt_generated
+.factorypath
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-# Git
+# =================================
+# Git (não necessário no build)
+# =================================
 .git/
 .gitignore
 .gitattributes
+.github/
 
-# Logs
+# =================================
+# Logs (não necessários no build)
+# =================================
 *.log
 logs/
 
-# Sistema
+# =================================
+# Sistema Operacional
+# =================================
 .DS_Store
 Thumbs.db
 
-# Documentação
-README.md
+# =================================
+# Documentação (reduz tamanho da imagem)
+# =================================
+*.md
 docs/
+HELP.md
 
-# Testes
+# =================================
+# Testes (pulamos com -DskipTests)
+# =================================
 src/test/
 
+# =================================
 # Temporários
+# =================================
 *.tmp
 *.swp
 *.bak
+*.cache
+
+# =================================
+# IMPORTANTE: NÃO ignore os arquivos abaixo!
+# Eles SÃO necessários para o Docker build
+# =================================
+# ✅ Maven Wrapper (NECESSÁRIO)
+# .mvn/
+# mvnw
+# mvnw.cmd
+# 
+# ✅ Código Fonte (NECESSÁRIO)
+# src/main/
+#
+# ✅ Configuração Maven (NECESSÁRIO)
+# pom.xml
+#
+# ✅ Application Properties (NECESSÁRIO)
+# src/main/resources/application*.properties
