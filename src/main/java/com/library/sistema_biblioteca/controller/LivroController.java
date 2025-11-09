@@ -20,7 +20,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/livros")
-@CrossOrigin(origins = {"https://bibliotecadjr.pages.dev/", "http://localhost:3000"})
 @Tag(name = "Livros", description = "API para gerenciamento de livros")
 public class LivroController {
 
