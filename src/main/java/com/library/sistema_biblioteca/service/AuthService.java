@@ -22,9 +22,9 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse register(RegisterRequest request) {
-        // Verificar se username já existe
-        if (usuarioRepository.existsByUserName(request.getUsername())) {
-            throw new RuntimeException("Username ja existe!");
+        // Verificar se usuario já existe
+        if (usuarioRepository.existsByUsuario(request.getUsuario())) {
+            throw new RuntimeException("Usuario ja existe!");
         }
 
         // Verificar se email já existe
@@ -34,8 +34,8 @@ public class AuthService {
 
         // Criar novo usuário
         Usuario usuario = new Usuario();
-        usuario.setUserName(request.getUsername());
-        usuario.setSenha(passwordEncoder.encode(request.getPassword()));
+        usuario.setUsuario(request.getUsuario());
+        usuario.setSenha(passwordEncoder.encode(request.getSenha()));
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
         usuario.setRole(request.getRole() != null ? request.getRole() : "USER");
@@ -60,13 +60,13 @@ public class AuthService {
         // Autenticar
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
+                        request.getUsuario(),
+                        request.getSenha()
                 )
         );
 
         // Buscar usuário
-        Usuario usuario = usuarioRepository.findByUserName(request.getUsername())
+        Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario())
                 .orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
 
         // Gerar token

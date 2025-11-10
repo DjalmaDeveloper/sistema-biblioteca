@@ -12,15 +12,15 @@ public class AuthResponse {
     private String token;
     private String type = "Bearer";
     private Long id;
-    private String username;
+    private String usuario;
     private String nome;
     private String email;
     private String role;
 
-    public AuthResponse(String token, Long id, String username, String nome, String email, String role) {
+    public AuthResponse(String token, Long id, String usuario, String nome, String email, String role) {
         this.token = token;
         this.id = id;
-        this.username = username;
+        this.usuario = usuario;
         this.nome = nome;
         this.email = email;
         this.role = role;

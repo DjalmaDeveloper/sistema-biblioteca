@@ -26,10 +26,10 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "UserName é obrigatório")
-    @Size(min = 3, max = 50, message = "Username deve ter entre 3 e 50 caracteres")
+    @NotBlank(message = "Usuário é obrigatório")
+    @Size(min = 3, max = 50, message = "Usuário deve ter entre 3 e 50 caracteres")
     @Column(unique = true, nullable = false, length = 50)
-    private String userName;
+    private String usuario;
 
     @NotBlank(message = "Senha é obrigatória")
     @Column(nullable = false)
@@ -70,7 +70,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return usuario;
     }
 
     @Override
