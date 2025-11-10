@@ -1,9 +1,8 @@
 package com.library.sistema_biblioteca.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +15,11 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    // Chave secreta (em produção, usar variável de ambiente)
-    @Value("${jwt.secret:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}")
+    // Chave secreta em Base64 (mínimo 256 bits para HS256)
+    @Value("${jwt.secret:bXlTZWNyZXRLZXlGb3JKV1RBdXRoZW50aWNhdGlvblNwcmluZ0Jvb3RCaWJsaW90ZWNhU2lzdGVtYTIwMjQ=}")
     private String secret;
 
-    @Value("${jwt.expiration:86400000}") // 24 horas em ms
+    @Value("${jwt.expiration:86400000}") // 24 horas em milissegundos
     private Long expiration;
 
     // Gerar chave segura
