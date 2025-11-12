@@ -83,7 +83,7 @@ public class UsuarioService {
         }
 
         if (request.getPerfil() != null && !request.getPerfil().isEmpty()) {
-            usuario.setRole(request.getPerfil());
+            usuario.setPerfil(request.getPerfil());
         }
 
         if (request.getAtivo() != null) {
@@ -131,7 +131,7 @@ public class UsuarioService {
         response.setUsuario(usuario.getUsuario());
         response.setNome(usuario.getNome());
         response.setEmail(usuario.getEmail());
-        response.setPerfil(usuario.getRole());
+        response.setPerfil(usuario.getPerfil());
         response.setStatus(usuario.getAtivo() ? "Ativo" : "Inativo");
         response.setDataCriacao(usuario.getDataCriacao());
         return response;

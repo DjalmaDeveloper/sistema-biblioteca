@@ -45,7 +45,7 @@ public class Usuario implements UserDetails {
     private String email;
 
     @Column(nullable = false, length = 20)
-    private String role = "USER"; // ADMIN ou USER
+    private String perfil = "USER"; // ADMIN ou USER
 
     @Column(nullable = false)
     private Boolean ativo = true;
@@ -60,7 +60,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + perfil));
     }
 
     @Override
