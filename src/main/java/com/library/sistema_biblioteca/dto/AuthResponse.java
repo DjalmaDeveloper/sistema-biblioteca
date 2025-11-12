@@ -15,14 +15,14 @@ public class AuthResponse {
     private String usuario;
     private String nome;
     private String email;
-    private String role;
+    private String perfil;
 
-    public AuthResponse(String token, Long id, String usuario, String nome, String email, String role) {
+    public AuthResponse(String token, Long id, String usuario, String nome, String email, String perfil) {
         this.token = token;
         this.id = id;
         this.usuario = usuario;
         this.nome = nome;
         this.email = email;
-        this.role = role;
+        this.perfil = perfil;
     }
 }

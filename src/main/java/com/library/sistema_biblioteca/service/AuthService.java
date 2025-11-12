@@ -38,7 +38,7 @@ public class AuthService {
         usuario.setSenha(passwordEncoder.encode(request.getSenha()));
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
-        usuario.setRole(request.getRole() != null ? request.getRole() : "USER");
+        usuario.setPerfil(request.getPerfil() != null ? request.getPerfil() : "USER");
         usuario.setAtivo(true);
 
         usuarioRepository.save(usuario);
@@ -52,7 +52,7 @@ public class AuthService {
                 usuario.getUsername(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getRole()
+                usuario.getPerfil()
         );
     }
 
@@ -78,7 +78,7 @@ public class AuthService {
                 usuario.getUsername(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getRole()
+                usuario.getPerfil()
         );
     }
 }

@@ -27,5 +27,5 @@ public class RegisterRequest {
     @NotBlank(message = "Email é obrigatório")
     private String email;
 
-    private String role = "USER"; // Padrão USER
+    private String perfil = "USER"; // Padrão USER
 }
