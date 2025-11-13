@@ -1,5 +1,6 @@
 package com.library.sistema_biblioteca.service;
 
+import com.library.sistema_biblioteca.dto.UsuarioCreateRequest;
 import com.library.sistema_biblioteca.dto.UsuarioResponse;
 import com.library.sistema_biblioteca.dto.UsuarioUpdateRequest;
 import com.library.sistema_biblioteca.model.Usuario;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +47,35 @@ public class UsuarioService {
         Usuario user = usuarioRepository.findByUsuario(usuario)
                 .orElseThrow(() -> new RuntimeException("Usuario nao encontrado: " + usuario));
         return convertToResponse(user);
+    }
+
+    /**
+     * Criar novo usuário
+     */
+    @Transactional
+    public UsuarioResponse create(UsuarioCreateRequest request) {
+        // Validar se usuário já existe
+        if (usuarioRepository.existsByUsuario(request.getUsuario())) {
+            throw new RuntimeException("Usuario ja existe!");
+        }
+
+        // Validar se email já existe
+        if (usuarioRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email ja existe!");
+        }
+
+        // Criar novo usuário
+        Usuario usuario = new Usuario();
+        usuario.setUsuario(request.getUsuario());
+        usuario.setNome(request.getNome());
+        usuario.setEmail(request.getEmail());
+        usuario.setSenha(passwordEncoder.encode(request.getSenha()));
+        usuario.setPerfil(request.getPerfil() != null ? request.getPerfil() : "USER");
+        usuario.setAtivo(request.getAtivo() != null ? request.getAtivo() : true);
+        usuario.setDataCriacao(LocalDateTime.now());
+
+        Usuario saved = usuarioRepository.save(usuario);
+        return convertToResponse(saved);
     }
 
     /**

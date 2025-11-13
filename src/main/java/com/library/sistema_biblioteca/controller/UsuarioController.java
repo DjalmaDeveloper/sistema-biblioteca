@@ -1,5 +1,6 @@
 package com.library.sistema_biblioteca.controller;
 
+import com.library.sistema_biblioteca.dto.UsuarioCreateRequest;
 import com.library.sistema_biblioteca.dto.UsuarioResponse;
 import com.library.sistema_biblioteca.dto.UsuarioUpdateRequest;
 import com.library.sistema_biblioteca.service.UsuarioService;
@@ -148,6 +149,48 @@ public class UsuarioController {
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @Operation(
+            summary = "Criar novo usuário",
+            description = "Cria um novo usuário no sistema. Requer perfil ADMIN."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Usuário criado com sucesso",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Dados inválidos ou usuário/email já existe",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Não autenticado",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = "Sem permissão - Requer perfil ADMIN",
+                    content = @Content
+            )
+    })
+    public ResponseEntity<UsuarioResponse> create(
+            @Valid @RequestBody UsuarioCreateRequest request
+    ) {
+        try {
+            UsuarioResponse created = usuarioService.create(request);
+            return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
